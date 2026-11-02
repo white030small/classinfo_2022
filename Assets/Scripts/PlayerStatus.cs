@@ -3,7 +3,8 @@
 public class PlayerStatus : MonoBehaviour
 {
     [Header("玩家狀態")]
-    public int HP = 1;           // 生命值
+    public int MaxHP = 3;
+    public int CurrentHP = 3;           // 生命值
     public Transform spawn;      // 復活點＆重生點
 
     [Header("隱身設定")]
@@ -15,11 +16,13 @@ public class PlayerStatus : MonoBehaviour
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private PlayerUI ui;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        ui = GetComponent<PlayerUI>();
     }
 
     void Update()
@@ -61,9 +64,19 @@ public class PlayerStatus : MonoBehaviour
         sr.color = c;
     }
 
-    public void isDead()
+    void TakingDamage(int dmg) 
+    {
+        CurrentHP - dmg;
+        if (CurrentHP<=0) 
+        {
+            isDead();
+        }
+        ui.UpdateUI();
+    }
+    void isDead()
     {
         transform.position = spawn.position;
         rb.velocity = Vector2.zero;   // 把速度歸零，避免帶著掉落速度復活
+        CurrentHP = MaxHP;
     }
 }
