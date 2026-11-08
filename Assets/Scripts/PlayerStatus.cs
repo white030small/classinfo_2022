@@ -64,9 +64,9 @@ public class PlayerStatus : MonoBehaviour
         sr.color = c;
     }
 
-    void TakingDamage(int dmg) 
+    public void TakingDamage(int dmg) 
     {
-        CurrentHP - dmg;
+        CurrentHP -= dmg;
         if (CurrentHP<=0) 
         {
             isDead();
