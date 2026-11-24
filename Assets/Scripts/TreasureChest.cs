@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TreasureChest : MonoBehaviour
 {
     public GameObject closed;
     public GameObject opened;
+    public UIManager uiManager;   // ä|ç› Panel è„ìI UIManager
 
     void Start()
     {
@@ -13,10 +12,11 @@ public class TreasureChest : MonoBehaviour
         opened.SetActive(false);
     }
 
-    void OnTriggerStay2D(Collider other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.name != "Player") return;
         opened.SetActive(true);
         closed.SetActive(false);
+        uiManager.OpenPanel();
     }
 }

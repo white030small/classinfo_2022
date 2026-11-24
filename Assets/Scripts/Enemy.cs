@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
 {
     [Tooltip("ˆÚ“®")]
     [SerializeField]
-    int SwitchTimer = 3f;
+    float SwitchTimer = 3f;
     [Tooltip("”½çzˆÚ“®•ûŒü")]
     public bool MovingRight = true;
     float AttackCooldown = 0f;
@@ -18,18 +18,18 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-        if (AttackCooldown>0f) 
+        if (AttackCooldown > 0f) 
         { AttackCooldown -= Time.deltaTime; }
 
         Vector2 pos = transform.position;
 
         if (MovingRight) 
         {
-            pos.x + 1f * Time.deltaTime;
+            pos.x += 1f * Time.deltaTime;
         }
         else 
         {
-            pos.x - 1f * Time.deltaTime;
+            pos.x -= 1f * Time.deltaTime;
         }
         transform.position = pos;
 
